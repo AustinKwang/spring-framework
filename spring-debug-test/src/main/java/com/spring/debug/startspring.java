@@ -1,5 +1,6 @@
 package com.spring.debug;
 
+import com.spring.debug.component.Aservice;
 import com.spring.debug.component.MyCalculator;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -15,6 +16,8 @@ public class startspring {
 		ApplicationContext applicationContext = getApplicationContext();
 		MyCalculator myCalculator = applicationContext.getBean(MyCalculator.class);
 		System.out.println(myCalculator.add(1, 6));
+		Aservice aservice = applicationContext.getBean(Aservice.class);
+		aservice.doA();
 	}
 
 	private static ApplicationContext getApplicationContext() {

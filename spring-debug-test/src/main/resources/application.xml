@@ -11,7 +11,7 @@
 
 
     <context:annotation-config />
-    <context:component-scan base-package="com.spring.debug.component" />
+<!--    <context:component-scan base-package="com.spring.debug.component" />-->
     <bean id="myCalculator" class="com.spring.debug.component.MyCalculator" scope="prototype"></bean>
 
 </beans>
