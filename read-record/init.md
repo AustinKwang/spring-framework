@@ -27,7 +27,7 @@ strictHelper = PropertyPlaceholderHelper
 
     在loadBean Defini中先注册了如下bean调用了
     <context:annotation-config />配置添加了如下的BeanPostProcessor到BeanMap中
-    nnotationConfigUtils.registerAnnotationConfigProcessors()方法
+    AnnotationConfigUtils.registerAnnotationConfigProcessors()方法
     org.springframework.context.annotation.internalConfigurationAnnotationProcessor  ConfigurationClassPostProcessor
     org.springframework.context.annotation.internalAutowiredAnnotationProcesso  AutowiredAnnotationBeanPostProcessor
     org.springframework.context.annotation.internalCommonAnnotationProcessor   CommonAnnotationBeanPostProcessor
@@ -41,3 +41,4 @@ strictHelper = PropertyPlaceholderHelper
 interface org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor  可寻找到  ConfigurationClassPostProcessor
 执行如上类中: postProcessBeanDefinitionRegistry 方法
 执行postProcessBeanFactory()
+    beanPostProcessors中添加 ImportAwareBeanPostProcessor

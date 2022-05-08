@@ -12,6 +12,9 @@ dependencies {
     compile(project(":spring-beans"))
     compile(project(":spring-context"))
     compile(project(":spring-core"))
+    compile(project(":spring-aop"))
+    compile(project(':spring-aspects'))
+//    ('org.aspectj"aspectjrt:1.8.13')
 //    optional(project(":spring-jdbc"))  // for Quartz support
 //    optional(project(":spring-tx"))  // for Quartz support
     

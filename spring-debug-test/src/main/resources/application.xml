@@ -11,7 +11,11 @@
 
 
     <context:annotation-config />
-<!--    <context:component-scan base-package="com.spring.debug.component" />-->
-    <bean id="myCalculator" class="com.spring.debug.component.MyCalculator" scope="prototype"></bean>
+	<context:property-placeholder location="classpath:test.properties"/>
+    <context:component-scan base-package="com.spring.debug.component">
+		<context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect" />
+	</context:component-scan>
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!--<bean id="myCalculator" class="com.spring.debug.component.MyCalculator" scope="prototype"></bean>-->
 
 </beans>

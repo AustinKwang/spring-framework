@@ -1,0 +1,53 @@
+1. 获取 BeanFactory DefaultListableBeanFactory: 用来根据BeanDefinition生成对象, 其中包括缓存等实现
+2. 解析xml获取BeanDefinition
+3. BeanPostProcessor :在Bean实例化之后,添加逻辑
+4. BeanFactoryPostProcessor
+5. Listeners
+6. FactoryBean: 用以生成一些特殊逻辑bean对象的工厂类, 通过实现该接口,通过编程的方式返回相应的Bean,自定义实例化逻辑
+
+
+
+ApplicationContextAware
+
+
+Spring的几种扩展方式
+1. 自定义xml,以及相应的解析:
+    1. 定义schema
+    2. 创建NamespaceHandler或者NamespaceHandlerSupport
+    3. 定义BeanDefinitionParser
+    4. 注册handleer: META-INF/spring.handlers, META-INF/spring.schemas
+
+2. 通过自定义注解
+    1. 自定义注解: 如@EnableApolloConfig
+    2. 自定义注册类: ImportBeanDefinitionRegistrar, 如ApolloConfigRegistrar
+
+3. spring容器提供的扩展点
+    1.接口BeanFactoryPostProcessor, postProcessBeanFactory(), 调用时Spring在容器初始化过程中调用，调用时机是所有bean的定义信息都已经初始化好，但是这些bean还没有实例化
+
+    2.接口BeanPostProcessor中 postProcessBeforeInitialization()和postProcessAfterInitialization(),
+        postProcessBeforeInitialization会在每一个bean实例化之后、初始化（如afterPropertiesSet方法）之前被调用。
+        postProcessAfterInitialization则在每一个bean初始化之后被调用。
+
+
+4. 通过接口ApplicationContextInitializer
+
+
+
+参考: https://cloud.tencent.com/developer/article/1486121
+
+
+AbstractAutowireCapableBeanFactory.createBean()中如下方法可作为扩展点,在AbstractAutoProxyCreator中postProcessBeforeInstantiation(),若能通过自定义扩展方法获得目标对象,
+
+	TargetSource targetSource = getCustomTargetSource(beanClass, beanName);
+
+try {
+			// Give BeanPostProcessors a chance to return a proxy instead of the target bean instance.
+			Object bean = resolveBeforeInstantiation(beanName, mbdToUse);
+			if (bean != null) {
+				return bean;
+			}
+		}
+		catch (Throwable ex) {
+			throw new BeanCreationException(mbdToUse.getResourceDescription(), beanName,
+					"BeanPostProcessor before instantiation of bean failed", ex);
+		}
